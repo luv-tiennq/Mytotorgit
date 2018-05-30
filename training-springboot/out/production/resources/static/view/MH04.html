@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="Layout :: head">
+    <meta charset="UTF-8">
+    <title>MH04</title>
+    <script>
+        function myFunction() {
+
+            var checkBox = document.getElementById("checkCompanyRegister");
+
+            var text = document.getElementById("text");
+
+            var checkAgain = document.getElementById("checkCompanyUnregister");
+
+            if (checkBox.checked) {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+
+            if (checkAgain.checked) {
+                checkBox.checked = false;
+            }
+
+        }
+        function myFunction2() {
+            var checkBox = document.getElementById("checkCompanyRegister");
+
+            var checkAgain = document.getElementById("checkCompanyUnregister");
+            
+            if (checkBox.checked) {
+                checkAgain.checked = false;
+            }
+
+        }
+    </script>
+    <link href="../image/cal.jpg" th:href="@{/image/cal.jpg}"
+          rel="shortcut icon"/>
+
+</head>
+<body>
+<form th:action="" method="POST">
+    <table cellpadding="4" cellspacing="0" width="900px">
+
+        <tr>
+            <td colspan="2" align="right">
+                <!--<nav th:replace="Layout :: header"></nav>-->
+                <a href="">Logout</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left">
+                <h3>Thêm mới thông tin thẻ bảo hiểm</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="color:red">Hiển thị lỗi tại đây</td>
+        </tr>
+    </table>
+    <table th:object="${user}">
+
+        <tr>
+            <td align="left" width="200px">
+                Mã số thẻ bảo hiểm
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{insuranceNumber}" value="${user.insuranceNumber}"
+                       size="20px"/>
+            </td>
+            <td>
+                (format: 10 chữ số)
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="200px">
+                Họ và tên
+            </td>
+            <td colspan="2">
+                <input type="text"
+                       th:field="*{fullName}" value="${user.fullName}"
+                       size="20px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="200px">
+                Giới tính
+            </td>
+            <td colspan="2" align="left">
+                <select th:field="*{sex_id}">
+                    <option value="0">Hãy Chọn</option>
+                    <span th:each="sex : ${listSex}">
+                                    <option th:value="${sex.getSexId() }"> ${sex.getSexName()}</option>
+                                </span>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="200px">
+                Ngày sinh
+            </td>
+            <td align="left">
+                <input type="date" type="dd/MM/yyyy"
+                       th:field="*{dateOfBirth}" value="${user.dateOfBirth}"
+                       size="100px"/>
+            </td>
+            <td>
+                <img src="image/cal.jpg"
+                />(format: dd/MM/yyyy)
+            </td>
+        </tr>
+        <tr>
+            <td align="left" rowspan="8" margin-top="20px" width="200px">
+                Công ty
+            </td>
+            <td colspan="2" align="left">
+                <input type="checkbox" id="checkCompanyRegister" onclick="myFunction()">
+                Công ty đã có
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left">
+                <select th:field="*{company_id}">
+                    <option value="0">Luvina</option>
+                    <span th:each="company : ${listCompany}">
+                                    <option th:value="${company.getGroupId() }"> ${company.getGroupName()}</option>
+                                </span>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="text" style="display:none">Hiển thị thông tin công ty</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left">
+                <input type="checkbox" id="checkCompanyUnregister" onclick="myFunction2()">
+                Đăng ký theo công ty mới
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="100px">
+                Tên công ty
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{nameCompany}" value="${user.nameCompany}"
+                       size="20px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="100px">
+                Địa chỉ
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{placeOfCompany}" value="${user.placeOfCompany}"
+                       size="20px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="100px">
+                Email
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{mail}" value="${user.mail}"
+                       size="20px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="100px">
+                Điện thoại
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{phone}" value="${user.phone}"
+                       size="20px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="200px">
+                Nơi đăng ký KCB
+            </td>
+            <td colspan="2" align="left">
+                <input type="text"
+                       th:field="*{placeOfRegister}" value="${user.placeOfRegister}"
+                       size="20px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="200px">
+                Ngày bắt đầu thẻ bảo hiểm
+            </td>
+            <td align="left">
+                <input type="date" type="dd/MM/yyyy"
+                       th:field="*{startDate}" value="${user.startDate}"
+                       size="100px"/>
+            </td>
+            <td>
+                <img src="image/cal.jpg"/>(format: dd/MM/yyyy)
+            </td>
+        </tr>
+        <tr>
+            <td align="left" width="200px">
+                Ngày kết thúc thẻ bảo hiểm
+            </td>
+            <td align="left">
+                <input type="date" type="dd/MM/yyyy"
+                       th:field="*{endDate}" value="${user.endDate}"
+                       size="100px"/>
+            </td>
+            <td>
+                <img src="image/cal.jpg"/>(format: dd/MM/yyyy)
+            </td>
+        </tr>
+    </table>
+
+    </td>
+    </tr>
+    </table>
+</form>
+</body>
+</html>
