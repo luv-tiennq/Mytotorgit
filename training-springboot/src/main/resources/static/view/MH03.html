@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="Layout :: head">
+    <meta charset="UTF-8"/>
+    <title>MH03</title>
+</head>
+<body>
+<form th:action="" method="POST">
+    <table cellpadding="4" cellspacing="0" width="900px">
+
+        <tr>
+            <td colspan="2" align="right">
+                <!--<nav th:replace="Layout :: header"></nav>-->
+                <a href="">Logout</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left">
+                <h3>Chi tiết thông tin thẻ bảo hiểm</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left">
+                <input type="button" href="" th:href=""
+                       value="Quay Lại"/></td>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left">
+                <table border="1" cellpadding="4" cellspacing="0" width="400px" th:object="${user}">
+                    <tr>
+                        <td align="left">
+                            Mã số thẻ bảo hiểm
+                        </td>
+                        <td align="left">
+                            ${user.fullName}
+                        </td>
+                    </tr>
+                    <tr th:object="${user}">
+                        <td align="left">
+                            Họ và tên
+                        </td>
+                        <td align="left">
+                            ${user.insuranceNumber}
+                        </td>
+                    </tr>
+                    <tr th:object="${user}">
+                        <td align="left">
+                            Giới tính
+                        </td>
+                        <td align="left">
+                            ${user.Sex}
+                        </td>
+                    </tr>
+                    <tr th:object="${user}">
+                        <td align="left">
+                            Ngày sinh
+                        </td>
+                        <td align="left">
+                            ${user.dateOfBirth}
+                        </td>
+                    </tr>
+                    <tr th:object="${user}">
+                        <td align="left">
+                            Tên Công ty
+                        </td>
+                        <td align="left">
+                            ${user.nameCompany}
+                        </td>
+                    </tr>
+                    <tr th:object="${user}">
+                        <td align="left">
+                            Nơi đăng ký KCB
+                        </td>
+                        <td align="left">
+                            ${user.placeOfRegister}
+                        </td>
+                    </tr>
+                    <tr th:object="${user}">
+                        <td align="left">
+                            Kỳ hạn thẻ bảo hiểm
+                        </td>
+                        <td align="left">
+                            ${user.estimate}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" href="" th:href=""
+                       value="Xóa"/>
+                <input type="button" href="" th:href=""
+                       value="Cập nhật"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

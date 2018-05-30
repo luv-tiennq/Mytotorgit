@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MH01</title>
+</head>
+<body>
+<center>
+    <form th:action="" method="POST">
+        <table cellpadding="4" cellspacing="0" width="400px">
+
+            <tr>
+                <td colspan="2" style="color:red">Hiển thị lỗi tại đây</td>
+            </tr>
+
+            <tr>
+                <th width="120px">&nbsp;</th>
+                <th></th>
+            </tr>
+
+            <tr>
+                <th colspan="2" align="left">${LABEL_MH01_TOP}</th>
+            </tr>
+
+
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
+            <tr align="left">
+                <td>${LABEL_MH01_USERNAME}:</td>
+                <td align="left"><input type="text"
+                                        th:field="*{loginName}" value="${loginName}"
+                                        size="20"/></td>
+            </tr>
+            <tr align="left">
+                <td>${LABEL_MH01_PASSWORD}:</td>
+                <td align="left"><input type="password"
+                                        th:field="*{password}" value="" size="20"
+                /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td align="left">
+                    <input type="submit"
+                           value="${LABEL_MH01_BTN_LOGIN}"/></td>
+            </tr>
+        </table>
+    </form>
+</center>
+</body>
+</html>

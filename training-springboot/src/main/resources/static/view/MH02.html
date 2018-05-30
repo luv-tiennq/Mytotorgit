@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="Layout :: head">
+    <meta charset="UTF-8">
+    <title>MH02</title>
+</head>
+<body>
+<form th:action="" method="POST">
+    <table cellpadding="4" cellspacing="0" width="900px">
+
+        <tr>
+            <td colspan="2" align="right">
+                <!--<nav th:replace="Layout :: header"></nav>-->
+                <a href="">Logout</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center">
+                <h4>Danh sách thẻ bảo hiểm</h4>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <h4>Tên Công ty</h4>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <select th:field="*{company_id}">
+                    <option value="0">Luvina</option>
+                    <span th:each="company : ${listCompany}">
+                        <option th:value="${company.getGroupId() }"> ${company.getGroupName()}</option>
+                    </span>
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table border="0" width="90%" cellpadding="0"
+                       cellspacing="0">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">Thông tin tìm kiếm</td>
+                    </tr>
+                    <tr>
+                        <td width="100%">
+                            <table cellpadding="4" cellspacing="0" align="center">
+                                <tr>
+                                    <td>Tên người sử dụng</td>
+                                    <td align="left"><input type="text"
+                                                            name="name" value="" size="20"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mã số thẻ bảo hiểm</td>
+                                    <td align="left"><input type="text"
+                                                            name="insuranceNumber" value="" size="20"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Nơi đăng ký</td>
+                                    <td align="left"><input type="text"
+                                                            name="placeOfRegister" value="" size="20"/></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit"
+                                   value="${LABEL_MH01_BTN_SEARCH}"/></td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                <input type="button" href="" th:href=""
+                       value="Đăng ký"/></td>
+            </td>
+            <td align="center">
+                <input type="button" href="" th:href=""
+                       value="Exprot CSV"/></td>
+            </td>
+        </tr>
+    </table>
+    <table border="1" cellpadding="4" cellspacing="0" width="80%">
+        <tr>
+            <th align="center" th:switch="">Tên người sử dụng
+
+                <span th:case="DESC">
+                    <a th:href="">△▼</a>
+                </span>
+                <span th:when="ASC">
+                    <a th:href="">▲▽</a>
+                </span>
+
+            </th>
+            <th align="center">Giới tính</th>
+            <th align="center">Ngày sinh</th>
+            <th align="center">Mã số thẻ bảo hiểm</th>
+            <th align="center" width="200px">Kỳ hạn</th>
+            <th align="center">Nơi đăng ký KCB</th>
+
+        </tr>
+
+        <th:block th:each="user: ${listUser}">
+            <tr>
+                <th align="center">
+                    <p th:text="${user.fullName}"></p>
+                </th>
+                <th align="center">
+                    <p th:text="${user.sex}"></p>
+                </th>
+                <th align="center">
+                    <p th:text="${user.dateOfBirth}"></p>
+                </th>
+                <th align="center">
+                    <p th:text="${user.insuranceNumber}"></p>
+                </th>
+                <th align="center">
+                    <p th:text="${user.estimate}"></p>
+                </th>
+                <th align="center">
+                    <p th:text="${user.placeOfRegister}"></p>
+                </th>
+            </tr>
+        </th:block>
+
+    </table>
+    <!-- Begin vung paging -->
+    <table>
+        <tr>
+            <!-- nếu tổng số trang > 1 -->
+            <ul th:if="${totalPages > 1 }">
+                <td>
+                    <div>
+                        <!-- xét điều kiện phần tử đầu tiên của listPagging để hiển >> -->
+                        <!-- Nếu như list đấy mà có trang đầu tiên lớn hơn hoặc bằng 6 -->
+                        <!-- Hiển thị link << và set các Parameter và attribute dùng cho sau này -->
+                        <span th:if="${listPaging[0] >= 5 }"><a th:href="">&lt;&lt;</a>&nbsp;</span>
+
+                        <!-- Tiếp đó là hiển thị số trang dựa vào listPaging đc truyền từ listController -->
+                        <span th:each="paging: ${listPaging}">
+                            <span th:switch="${currentPage}">
+                                <!-- xử lý việc hiển thị và click trang -->
+
+                                <span th:case="#${paging}"><a th:href="">${paging}</a>&nbsp;</span>
+                                <span th:case="${paging}">${paging}&nbsp;</span>
+                                <!-- xử lý việc hiển thị | -->
+                                <span th:if="${(paging%5 != 0) && (paging != totalPages)}">|</span>
+                            </span>
+                        </span>
+
+                        <span th:if="${listPaging[2]<totalPages }"><a th:href="">&gt;&gt;</a>&nbsp;</span>
+
+                    </div>
+                </td>
+            </ul>
+
+
+        </tr>
+    </table>
+    <!-- End vung paging -->
+
+</form>
+</body>
+</html>
